@@ -1,7 +1,8 @@
-package com.example.hackathonsbee.libs;
+package com.example.hackathonsbee.appManager;
 
 import org.junit.jupiter.api.Assertions;
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -17,7 +18,7 @@ public class ActionsWithOurElements {
 
     public ActionsWithOurElements(WebDriver webDriver) {
         this.webDriver = webDriver;
-        wait10 = new WebDriverWait(webDriver, 20);
+        wait10 = new WebDriverWait(webDriver, 30);
         wait50 = new WebDriverWait(webDriver, 50);
     }
 
@@ -28,6 +29,21 @@ public class ActionsWithOurElements {
             System.out.println(text + " Was input in to element ");
         } catch (Exception e) {
 
+        }
+    }
+
+    public void enterTextInToElement(By locator, String text) {
+        try {
+            clickOnElement(locator);
+            if (text != null){
+                String existingText = webDriver.findElement(locator).getAttribute("value");
+                if (!text.equals(existingText)){
+                    webDriver.findElement(locator).clear();
+                    webDriver.findElement(locator).sendKeys(text);
+                }
+            }
+        } catch (Exception e) {
+           e.printStackTrace();
         }
     }
 
@@ -133,4 +149,14 @@ public class ActionsWithOurElements {
         Assertions.fail("Cannot work with element" + e);
 
     }
+
+    public boolean isElementPresent(By locator) {
+        try {
+            webDriver.findElement(locator);
+            return true;
+        } catch (NoSuchElementException ex) {
+            return false;
+        }
+    }
+
 }
