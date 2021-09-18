@@ -1,9 +1,12 @@
 package com.example.hackathonsbee.libs;
 
 import org.junit.jupiter.api.Assertions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class ActionsWithOurElements {
@@ -49,6 +52,79 @@ public class ActionsWithOurElements {
             System.out.println("Element is displayed -> false");
             return false;
         }
+    }
+
+    public void hoverYourMouseOverTheElement(WebElement element) {
+        try {
+            Actions builder = new Actions(webDriver);
+            builder.moveToElement(element).build().perform();
+            System.out.println("Element selected");
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+    }
+
+    public boolean searchForItems(By xpath) {
+        try {
+            return searchForItems(webDriver.findElement(xpath));
+        } catch (Exception e){
+            return false;
+        }
+    }
+
+    public void clickOnElement(By xpath) {
+        try {
+            clickOnElement(webDriver.findElement(xpath));
+        }catch (Exception e){
+            printErrorAndStopTest(e);
+        }
+    }
+    public void selectValueInDD(WebElement element, String value) {
+        try {
+            Select select = new Select(element);
+            select.selectByValue(value);
+            System.out.println(element + "Was selected inn DD ");
+        }catch (Exception e){
+            printErrorAndStopTest(e);
+        }
+    }
+    public void workWithCheckBox(WebElement element, String status) {
+        if ("check".equals(status)|| "uncheck".equals(status)){
+            try {
+                if (element.isSelected()&& "check".equals(status)){
+                    System.out.println("Already check");
+                }else if (!element.isSelected() && "check".equals(status)){
+                    element.click();
+                    System.out.println("check box checked");
+                }else if (element.isSelected() && "uncheck".equals(status)){
+                    element.click();
+                    System.out.println("check box deselected");
+                }else if (!element.isSelected() && "uncheck".equals(status)){
+                    System.out.println("check box is already unchecked");
+                }
+            }catch (Exception e){
+                printErrorAndStopTest(e);
+            }
+        }else {
+            System.out.println("State should be 'check' or 'uncheck'");
+            Assertions.fail("State should be 'check' or 'uncheck'");
+        }
+    }
+
+    public boolean checkButtonDisabled(WebElement element) {
+        wait50.until(ExpectedConditions.visibilityOf(element));
+        try {
+            if (element.isEnabled()) {
+                System.out.println("Element is active");
+                Assertions.fail("Element is active");
+            } else if (!element.isEnabled()) {
+                System.out.println("Element is not Active");
+                return !element.isEnabled();
+            }
+        } catch (Exception e) {
+            printErrorAndStopTest(e);
+        }
+        return false;
     }
 
 
