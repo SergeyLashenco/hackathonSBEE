@@ -2,6 +2,7 @@ package com.example.hackathonsbee.appManager;
 
 import com.example.hackathonsbee.configWebDriver.WebDriverProvider;
 import com.example.hackathonsbee.pages.MainPage;
+import com.example.hackathonsbee.pages.RegistrationPage;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 
@@ -15,9 +16,12 @@ public class ApplicationManager {
 
     private MainPage mainPage;
 
+    private RegistrationPage registrationPage;
+
     private SessionHelper sessionHelper;
 
     private NavigationHelper navigationHelper;
+
 
     public ApplicationManager() {
 
@@ -35,6 +39,7 @@ public class ApplicationManager {
  * Instance for pages
  */
         mainPage = new MainPage(driver);
+        registrationPage = new RegistrationPage(driver);
         navigationHelper = new NavigationHelper(driver);
     }
 
@@ -52,5 +57,9 @@ public class ApplicationManager {
 
     public NavigationHelper getNavigationHelper() {
         return navigationHelper;
+    }
+
+    public RegistrationPage getRegistrationPage(){
+        return registrationPage;
     }
 }
