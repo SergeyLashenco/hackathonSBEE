@@ -56,7 +56,12 @@ public class RegistrationPage extends ParentPage {
         return this;
     }
 
-    @Step("Fill Registration forms")
+    @Step("Fill Registration forms: \n" +
+            "firstsName - {firstsName}\n " +
+            "lastName - {lasName}\n " +
+            "emailVal - {emailVal}\n " +
+            "pass - {pass}\n " +
+            "cPass - {cPass}\n ")
     public RegistrationPage fillRegistrationFiled(String firstsName, String lasName, String emailVal, String pass, String cPass) {
         mapForTextFields.clear();
         mapForTextFields.put(firstName, firstsName);
