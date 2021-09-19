@@ -22,6 +22,9 @@ public class MainPage extends ParentPage {
     @FindBy(xpath = ".//a[@href='/ucstorefront/en/login']")
     public WebElement hrefSignInRegister;
 
+    @FindBy(xpath = ".//a[@href='/ucstorefront/en/logout']")
+    public WebElement hrefSignOut;
+
     @FindBy(id = "js-site-search-input")
     private WebElement inputSearch;
 
@@ -36,6 +39,13 @@ public class MainPage extends ParentPage {
         return hrefSignInRegister.isDisplayed();
     }
 
+    @Step("Проверить отображения ссылки Sign Out")
+    public boolean checkHrefSignOut() {
+        return hrefSignOut.isDisplayed();
+    }
+
+
+    //Sign Out
     @Step("Навести курсор мыши на нужную категорию товаров, в данном случае  {categoryGoods}")
     public MainPage hoverOnCategoryGoods(String categoryGoods) {
         String xpathCategoryGoods = String.format(".//a[@title='%s']", categoryGoods);
@@ -76,7 +86,7 @@ public class MainPage extends ParentPage {
         return this;
     }
 
-    @Step("Проверить что открылась страцица из товаром от Фирмы по которой проводился поиск")
+    @Step("Проверить что открылась страница из товаром от Фирмы по которой проводился поиск")
     public String getNameFirmsOnSearchPage() {
         String resultSearchOnPage = resultString.getText();
         String[] res = resultSearchOnPage.split("\"");

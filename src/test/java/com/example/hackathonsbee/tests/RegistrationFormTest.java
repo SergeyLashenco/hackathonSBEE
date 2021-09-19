@@ -1,8 +1,12 @@
 package com.example.hackathonsbee.tests;
 
 import io.qameta.allure.Description;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import static com.example.hackathonsbee.untils.RandomGenerateEmailAddress.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class RegistrationFormTest extends TestBase{
 
@@ -21,5 +25,15 @@ public class RegistrationFormTest extends TestBase{
     @Test
     public void registrationFormTest(){
         app.getMainPage().goToRegistrationPage();
+        assertTrue(app.getRegistrationPage().checkTextCreateAnAccount());
+        app.getRegistrationPage()
+                .fillInFiledFirstName("IVAN")
+                .fillInFiledLastName("IVANOV")
+                .fillInFiledEmail(randomStringEmail(10)) //An account already exists for this email address.
+                .fillInFiledPassword("123456789")
+                .fillInFiledCheckPwd("123456789")
+                .clickButtonCheckBoxConfirm()
+                .clickButtonREGISTER();
+        assertTrue(app.getMainPage().checkHrefSignOut());
     }
 }
