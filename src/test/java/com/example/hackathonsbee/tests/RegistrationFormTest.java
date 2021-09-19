@@ -1,10 +1,14 @@
 package com.example.hackathonsbee.tests;
 
 import io.qameta.allure.Description;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class RegistrationFormTest extends TestBase{
+import static com.example.hackathonsbee.untils.RandomGenerateEmailAddress.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+public class RegistrationFormTest extends TestBase {
 
 
     @DisplayName("Проверка формы регистрации , а также регистрации пользователя ")
@@ -19,7 +23,14 @@ public class RegistrationFormTest extends TestBase{
                     "6. Успешная регистрация на сайте"
     )
     @Test
-    public void registrationFormTest(){
+    public void registrationFormTest() {
         app.getMainPage().goToRegistrationPage();
+        assertTrue(app.getRegistrationPage().checkTextCreateAnAccount());
+        app.getRegistrationPage()
+                .fillRegistrationFiled("IVAN", "IVANOV"
+                        , randomStringEmail(10), "123456789", "123456789")
+                .clickButtonCheckBoxConfirm()
+                .clickButtonREGISTER();
+        assertTrue(app.getMainPage().checkHrefSignOut());
     }
 }
