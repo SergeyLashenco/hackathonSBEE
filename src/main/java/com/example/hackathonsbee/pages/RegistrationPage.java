@@ -18,6 +18,9 @@ public class RegistrationPage extends ParentPage {
     @FindBy(xpath = ".//div[@class='user-register__headline']")
     private WebElement textCreateAnAccount;
 
+    @FindBy(xpath = ".//div[@class='login-page__headline']")
+    private WebElement textReturningCustomer;
+
     @FindBy(name = "firstName")
     private WebElement firstName;
 
@@ -39,9 +42,53 @@ public class RegistrationPage extends ParentPage {
     @FindBy(xpath = ".//button[@class='btn btn-default btn-block']")
     private WebElement buttonRegister;
 
+    @FindBy(xpath = ".//input[@name='j_username']")
+    private WebElement emailForAuth;
+
+    @FindBy(xpath = ".//input[@name='j_password']")
+    private WebElement passForAuth;
+
+    @FindBy(xpath = ".//button[@class='btn btn-primary btn-block']")
+    private WebElement buttonLogIn;
+
     @Step("Проверить отображения текста Create an Account")
     public boolean checkTextCreateAnAccount() {
         return textCreateAnAccount.isDisplayed();
+    }
+
+    @Step("Проверить отображение текста Returning Customer")
+    public boolean checkTextReturningCustomer() {
+        return textReturningCustomer.isDisplayed();
+    }
+
+    @Step("Заполнить поле firstName {firstsName} ")
+    public RegistrationPage fillInFiledFirstName(String firstsName) {
+        actionsWithOurElements.enterTextInToElement(firstName, firstsName);
+        return this;
+    }
+
+    @Step("Заполнить поле lastName {lasName} ")
+    public RegistrationPage fillInFiledLastName(String lasName) {
+        actionsWithOurElements.enterTextInToElement(lastName, lasName);
+        return this;
+    }
+
+    @Step("Заполнить поле Email {emailVal}")
+    public RegistrationPage fillInFiledEmail(String emailVal) {
+        actionsWithOurElements.enterTextInToElement(email, emailVal);
+        return this;
+    }
+
+    @Step("Заполнить поле Password {pass}")
+    public RegistrationPage fillInFiledPassword(String pass) {
+        actionsWithOurElements.enterTextInToElement(pwd, pass);
+        return this;
+    }
+
+    @Step("Заполнить поле CheckPwd {cPass}")
+    public RegistrationPage fillInFiledCheckPwd(String cPass) {
+        actionsWithOurElements.enterTextInToElement(checkPwd, cPass);
+        return this;
     }
 
     @Step("Выбрать ЧекБокс Соглашения с правилами")
@@ -53,6 +100,24 @@ public class RegistrationPage extends ParentPage {
     @Step("Нажать на кнопку REGISTER")
     public RegistrationPage clickButtonREGISTER() {
         actionsWithOurElements.clickOnElement(buttonRegister);
+        return this;
+    }
+
+    @Step("Заполнить поле EMAIL ADDRESS для авторизации")
+    public RegistrationPage enterTextToInputEmail(String email) {
+        actionsWithOurElements.enterTextInToElement(emailForAuth, email);
+        return this;
+    }
+
+    @Step("Заполнить поле PASSWORD для авторизации")
+    public RegistrationPage enterTextToInputPass(String pass) {
+        actionsWithOurElements.enterTextInToElement(passForAuth, pass);
+        return this;
+    }
+
+    @Step("Нажать на кнопку Log in")
+    public RegistrationPage clickOnButtonLogIn() {
+        actionsWithOurElements.clickOnElement(buttonLogIn);
         return this;
     }
 
@@ -78,3 +143,4 @@ public class RegistrationPage extends ParentPage {
         return this;
     }
 }
+
