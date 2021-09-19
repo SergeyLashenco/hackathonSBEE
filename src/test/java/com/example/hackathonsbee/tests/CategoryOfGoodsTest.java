@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class CategoryOfGoodsTest extends TestBase {
 
 
-    @DisplayName("Проверка категории товаров - Snow ")
+    @DisplayName("Проверка отображения списка при наведении курсора на  категорию товаров - Snow ")
     @Description(
             "1. Перейти по ссылке: https://apparel-uk.local:9002/ucstorefront/en\n" +
                     "2. Навестись курсором на категорию “Snow”\n" +

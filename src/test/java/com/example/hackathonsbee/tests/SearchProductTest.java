@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 
 public class SearchProductTest extends TestBase{
 
-    @DisplayName("Проверка категории товаров - Snow ")
+    @DisplayName("Проверка поиска товара по названию Фирмы ")
     @Description(
 
                     "1. Перейти по ссылке: https://apparel-uk.local:9002/ucstorefront/en\n" +
