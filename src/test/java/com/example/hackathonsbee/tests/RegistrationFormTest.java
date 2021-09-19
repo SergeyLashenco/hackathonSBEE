@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static com.example.hackathonsbee.untils.RandomGenerateEmailAddress.*;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class RegistrationFormTest extends TestBase{
+public class RegistrationFormTest extends TestBase {
 
 
     @DisplayName("Проверка формы регистрации , а также регистрации пользователя ")
@@ -23,7 +23,7 @@ public class RegistrationFormTest extends TestBase{
                     "6. Успешная регистрация на сайте"
     )
     @Test
-    public void registrationFormTest(){
+    public void registrationFormTest() {
         app.getMainPage().goToRegistrationPage();
         assertTrue(app.getRegistrationPage().checkTextCreateAnAccount());
         app.getRegistrationPage()
