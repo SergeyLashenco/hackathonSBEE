@@ -27,11 +27,8 @@ public class RegistrationFormTest extends TestBase{
         app.getMainPage().goToRegistrationPage();
         assertTrue(app.getRegistrationPage().checkTextCreateAnAccount());
         app.getRegistrationPage()
-                .fillInFiledFirstName("IVAN")
-                .fillInFiledLastName("IVANOV")
-                .fillInFiledEmail(randomStringEmail(10)) //An account already exists for this email address.
-                .fillInFiledPassword("123456789")
-                .fillInFiledCheckPwd("123456789")
+                .fillRegistrationFiled("IVAN", "IVANOV"
+                        , randomStringEmail(10), "123456789", "123456789")
                 .clickButtonCheckBoxConfirm()
                 .clickButtonREGISTER();
         assertTrue(app.getMainPage().checkHrefSignOut());
