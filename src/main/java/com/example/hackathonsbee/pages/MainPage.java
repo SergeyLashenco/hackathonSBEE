@@ -82,4 +82,10 @@ public class MainPage extends ParentPage {
         String[] res = resultSearchOnPage.split("\"");
         return res[1];
     }
+
+    @Step("Перейти на страницу регистрации нажатием на ссылку Sign in / Register")
+    public RegistrationPage goToRegistrationPage(){
+        actionsWithOurElements.clickOnElement(hrefSignInRegister);
+        return new RegistrationPage(webDriver);
+    }
 }
