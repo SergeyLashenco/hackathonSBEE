@@ -24,7 +24,4 @@ public class SessionHelper extends ActionsWithOurElements {
             }
         });
     }
-
-    public void login(String userName, String password) {
-    }
 }
