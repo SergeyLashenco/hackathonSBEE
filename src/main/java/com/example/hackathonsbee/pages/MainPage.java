@@ -79,10 +79,7 @@ public class MainPage extends ParentPage {
     @Step("Проверить что открылась страцица из товаром от Фирмы по которой проводился поиск")
     public String getNameFirmsOnSearchPage() {
         String resultSearchOnPage = resultString.getText();
-        String[] res = resultSearchOnPage.split(" ");
-        String nameFirm = res[3];
-        String finalResName = nameFirm.substring(1, nameFirm.lastIndexOf("\""));
-        System.out.println(finalResName);
-        return finalResName;
+        String[] res = resultSearchOnPage.split("\"");
+        return res[1];
     }
 }

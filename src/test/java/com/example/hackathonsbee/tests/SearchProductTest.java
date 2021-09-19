@@ -18,7 +18,7 @@ public class SearchProductTest extends TestBase{
     )
     @Test
     public void searchProductsTest(){
-        String nameNeededFirmsForSearch = "Adidas";
+        String nameNeededFirmsForSearch = "Vans";
         app.getMainPage()
                 .sendProductsNameInTheSearchFiled(nameNeededFirmsForSearch)
                 .clickButtonSearch();
