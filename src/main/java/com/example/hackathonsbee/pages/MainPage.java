@@ -22,6 +22,15 @@ public class MainPage extends ParentPage {
     @FindBy(xpath = ".//a[@href='/ucstorefront/en/login']")
     public WebElement hrefSignInRegister;
 
+    @FindBy(id = "js-site-search-input")
+    private WebElement inputSearch;
+
+    @FindBy(xpath = ".//button[@type='submit']")
+    private WebElement buttonSearch;
+
+    @FindBy(xpath = ".//div[@class='results']")
+    private WebElement resultString;
+
     @Step("Проверить отображения ссылки Sign in / Register на странице ")
     public boolean checkHrefSignInRegister() {
         return hrefSignInRegister.isDisplayed();
@@ -42,8 +51,8 @@ public class MainPage extends ParentPage {
 
     public boolean checkGenderSplitLists(String... gendersName) {
         AtomicBoolean resultCheck = new AtomicBoolean(false);
-        step("Проверить что при наведении курсора на категорию “Snow” появляется список с товарами для мужчин/женщин/молодежи, экипировкой", ()->{
-            for (String gen : gendersName){
+        step("Проверить что при наведении курсора на категорию “Snow” появляется список с товарами для мужчин/женщин/молодежи, экипировкой", () -> {
+            for (String gen : gendersName) {
                 String xpathForGenderName = String.format("//div[contains(text(),'%s')]", gen);
                 resultCheck.set(resultsSearchCategoryGoodsSnow.stream()
                         .map(webElement -> webElement.findElement(By.xpath(xpathForGenderName)))
@@ -53,5 +62,27 @@ public class MainPage extends ParentPage {
             }
         });
         return resultCheck.get();
+    }
+
+    @Step("В поле поиска ввести название товара")
+    public MainPage sendProductsNameInTheSearchFiled(String productName) {
+        actionsWithOurElements.enterTextInToElement(inputSearch, productName);
+        return this;
+    }
+
+    @Step("Нажать на кнопу поиска")
+    public MainPage clickButtonSearch() {
+        actionsWithOurElements.clickOnElement(buttonSearch);
+        return this;
+    }
+
+    @Step("Проверить что открылась страцица из товаром от Фирмы по которой проводился поиск")
+    public String getNameFirmsOnSearchPage() {
+        String resultSearchOnPage = resultString.getText();
+        String[] res = resultSearchOnPage.split(" ");
+        String nameFirm = res[3];
+        String finalResName = nameFirm.substring(1, nameFirm.lastIndexOf("\""));
+        System.out.println(finalResName);
+        return finalResName;
     }
 }
